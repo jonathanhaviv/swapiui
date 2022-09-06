@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { fetchPaginatedData } from "../utils/fetchPaginatedData";
 import { Character } from "./Character";
 import { ErrorBoundary } from "./ErrorBoundary";
 
@@ -15,11 +16,10 @@ export const CharacterGrid = () => {
     const api = "https://swapi.dev/api";
 
     try {
-      // todo - api is paginated so need to fetch all the data
-      const peopleResponse = await fetch(`${api}/people`);
-      const peopleData = await peopleResponse.json();
+      const peopleData = await fetchPaginatedData(api, "people", 1);
+      
 
-      setCharacterData(peopleData.results);
+      setCharacterData(peopleData);
       setLoading(false);
     } catch (error) {
       console.error(error);
