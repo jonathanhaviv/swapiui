@@ -17,7 +17,7 @@ export const Character = ({ info }) => {
       <ul>
         {fields.map(field => {
           return (
-            <li key={name} className="capitalize">
+            <li key={field} className="capitalize">
               {field.replace("_", " ")}: {info[field]}
             </li>
           )
