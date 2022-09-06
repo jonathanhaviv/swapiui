@@ -2,8 +2,9 @@ import React, {useState, useEffect} from "react";
 import { Combobox } from "@headlessui/react";
 import { fetchPaginatedData } from "../utils/fetchPaginatedData";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { simpleFilter } from "../utils/filters";
 
-export const SearchBox = () => {
+export const SearchBox = ({ filter = simpleFilter}) => {
   const [values, setValues] = useState([]);
   const [selected, setSelected] = useState("");
   const [query, setQuery] = useState("");
@@ -26,6 +27,12 @@ export const SearchBox = () => {
       getData().catch((error) => console.error(error));
     }
   });
+
+  useEffect(() => {
+    if (loading === true) return;
+    const filteredValues = filter(values, query);
+    setFilteredData(filteredValues);
+  }, [query]);
 
   return (
     <div className="mx-auto w-1/5">
