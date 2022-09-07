@@ -70,6 +70,7 @@ export const App = () => {
           loading={loading}
           selected={peopleSelected}
           setSelected={setPeopleSelected}
+          allowFuzzy={true}
         />
       </ErrorBoundary>
       <ErrorBoundary>

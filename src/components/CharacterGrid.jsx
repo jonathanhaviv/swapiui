@@ -31,7 +31,7 @@ export const CharacterGrid = ({
       return a.distance - b.distance;
     });
 
-  const characters = characterData.map((info, index) => {
+  const characters = characterData.map((info) => {
     if (planetFilter !== "" && info.homeworld !== planetFilter) return;
     if (peopleFilter !== "" && info.distance < 0.6) return;
 

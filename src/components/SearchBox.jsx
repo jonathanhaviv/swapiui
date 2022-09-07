@@ -9,6 +9,7 @@ export const SearchBox = ({
   setSelected,
   selected = "",
   filter = simpleFilter,
+  allowFuzzy = false,
 }) => {
   const [query, setQuery] = useState("");
   const [filteredData, setFilteredData] = useState(values);
@@ -81,6 +82,19 @@ export const SearchBox = ({
                 </Combobox.Option>
               );
             })}
+
+          {loading === false && query !== "" && filteredData.length === 0 && (
+            <Combobox.Option
+              value={allowFuzzy ? query : ""}
+              className={({ active }) => {
+                return `cursor-pointer select-none px-2 py-2 ${
+                  active && "bg-blue-400 text-white"
+                }`;
+              }}
+            >
+              {allowFuzzy ? query : "No matching results"}
+            </Combobox.Option>
+          )}
         </Combobox.Options>
       </Combobox>
     </div>

@@ -5,6 +5,7 @@ export const simpleFilter = (dataset, query) => {
   });
 };
 
+// todo find better matching algo. Search distance struggles with fuzzy matching accurately. skywlker doesn't return Skywalker as a result.
 export const stringDistance = (string1, string2) => {
   let length1 = string1.length;
   let length2 = string2.length;
