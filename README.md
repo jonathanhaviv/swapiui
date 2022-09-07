@@ -11,7 +11,11 @@ git clone https://github.com/jonathanhaviv/postmanTakehome.git
 
 cd postmanTakeHome
 ```
-2. You can either run a production build or a development build.
+2. Install dependencies:
+```shell
+npm install
+```
+3. You can either run a production build or a development build.
     * To run a production build run the following command from within the project directory:
     ```shell
     npm start
