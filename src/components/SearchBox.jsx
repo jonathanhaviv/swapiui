@@ -1,9 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Combobox } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
 import { simpleFilter } from "../utils/filters";
 
-export const SearchBox = ({ values, loading, setSelected, selected = '', filter = simpleFilter}) => {
+export const SearchBox = ({
+  values,
+  loading,
+  setSelected,
+  selected = "",
+  filter = simpleFilter,
+}) => {
   const [query, setQuery] = useState("");
   const [filteredData, setFilteredData] = useState(values);
 
@@ -23,13 +29,19 @@ export const SearchBox = ({ values, loading, setSelected, selected = '', filter 
             displayValue={(value) => value}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-           
+            {({ open }) =>
+              open ? (
+                <ChevronUpIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              ) : (
                 <ChevronDownIcon
                   className="h-5 w-5 text-gray-400"
                   aria-hidden="true"
                 />
-              
-            
+              )
+            }
           </Combobox.Button>
         </div>
         <Combobox.Options className="bg-white w-1/5 rounded-md mt-1 absolute z-50  py-2">
@@ -73,4 +85,4 @@ export const SearchBox = ({ values, loading, setSelected, selected = '', filter 
       </Combobox>
     </div>
   );
-}
+};
