@@ -20,7 +20,7 @@ npm install
     ```shell
     npm start
     ```
-    * If you're having issues running the open command try to run the command with superuser privileges or run `npm start` and open the file `dist/index.html` in your browser.
+    * If you're having issues running the open command try to run the command with superuser privileges or run `npm run build` and open the file `dist/index.html` in your browser.
     * To run a development build run the following command from within the project directory:
     ```shell
     npm run dev
