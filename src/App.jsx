@@ -7,7 +7,8 @@ import { SearchBox } from "./components/SearchBox";
 import { fetchPaginatedData } from "./utils/fetchPaginatedData";
 
 export const App = () => {
-  const [selected, setSelected] = useState("");
+  const [planetSelected, setPlanetSelected] = useState("");
+  const [peopleSelected, setPeopleSelected] = useState("");
   const [characterData, setCharacterData] = useState([]);
   const [planetData, setPlanetData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,12 +60,25 @@ export const App = () => {
         <SearchBox
           values={planetData}
           loading={loading}
-          selected={selected}
-          setSelected={setSelected}
+          selected={planetSelected}
+          setSelected={setPlanetSelected}
         />
       </ErrorBoundary>
       <ErrorBoundary>
-        <CharacterGrid characterData={characterData} loading={loading} planetFilter={selected}/>
+        <SearchBox
+          values={characterData}
+          loading={loading}
+          selected={peopleSelected}
+          setSelected={setPeopleSelected}
+        />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <CharacterGrid
+          characterData={characterData}
+          loading={loading}
+          planetFilter={planetSelected}
+          peopleFilter={peopleSelected}
+        />
       </ErrorBoundary>
     </>
   );
