@@ -2,7 +2,7 @@ import React from "react";
 import { Character } from "./Character";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { BoltIcon } from "@heroicons/react/24/outline";
-import { stringDistance } from "../utils/filters";
+import { jaroWinkler } from "../utils/filters";
 
 export const CharacterGrid = ({
   characterData,
@@ -22,35 +22,37 @@ export const CharacterGrid = ({
 
   if (peopleFilter !== "")
     characterData.sort((a, b) => {
-      a.distance = stringDistance(peopleFilter, a.name);
-      b.distance = stringDistance(peopleFilter, b.name);
+      a.distance = Number(jaroWinkler(peopleFilter, a.name));
+      b.distance = Number(jaroWinkler(peopleFilter, b.name));
 
-      if (a.distance === 0) match = a;
-      if (b.distance === 0) match = b;
+      if (a.distance === 1) match = a;
+      if (b.distance === 1) match = b;
 
-      return a.distance - b.distance;
+      return b.distance - a.distance;
     });
+    else if (peopleFilter === "" && match) match = false;
 
-  const characters = characterData.map((info) => {
-    if (planetFilter !== "" && info.homeworld !== planetFilter) return;
-    if (peopleFilter !== "" && info.distance < 0.6) return;
-
-    return (
-      <ErrorBoundary key={info.name}>
-        <Character info={info} />
+  const characters =
+    match === false ? (
+      characterData.map((info) => {
+        if (planetFilter !== "" && info.homeworld !== planetFilter) return;
+        if (peopleFilter !== "" && info.distance < 0.6) return;
+        if (info.distance == 1) match = info;
+        return (
+          <ErrorBoundary key={info.name}>
+            <Character info={info} />
+          </ErrorBoundary>
+        );
+      })
+    ) : (
+      <ErrorBoundary>
+        <Character info={match} />
       </ErrorBoundary>
     );
-  });
 
   return (
     <div className="grid grid-cols-4 gap-y-7 p-5 place-items-center">
-      {match === false ? (
-        characters
-      ) : (
-        <ErrorBoundary>
-          <Character info={match} />
-        </ErrorBoundary>
-      )}
+      {characters}
     </div>
   );
 };
