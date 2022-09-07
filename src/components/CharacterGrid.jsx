@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { fetchPaginatedData } from "../utils/fetchPaginatedData";
+import React from "react";
 import { Character } from "./Character";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { BoltIcon } from "@heroicons/react/24/outline";
 
 
-export const CharacterGrid = ({ characterData, loading }) => {
-  // todo - update logic for homeworld url to homeworld name to implement the filter
-  const [planetFilter, setPlanetFilter] = useState("");
-
+export const CharacterGrid = ({ characterData, loading, planetFilter }) => {
   if (loading === true) {
     return (
       <p className="text-white font-black text-center mt-3 animate-pulse">

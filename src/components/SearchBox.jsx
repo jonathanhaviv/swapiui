@@ -3,8 +3,7 @@ import { Combobox } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { simpleFilter } from "../utils/filters";
 
-export const SearchBox = ({ values, loading, filter = simpleFilter}) => {
-  const [selected, setSelected] = useState("");
+export const SearchBox = ({ values, loading, setSelected, selected = '', filter = simpleFilter}) => {
   const [query, setQuery] = useState("");
   const [filteredData, setFilteredData] = useState(values);
 

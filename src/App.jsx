@@ -6,8 +6,8 @@ import { CharacterGrid } from "./components/CharacterGrid";
 import { SearchBox } from "./components/SearchBox";
 import { fetchPaginatedData } from "./utils/fetchPaginatedData";
 
-
 export const App = () => {
+  const [selected, setSelected] = useState("");
   const [characterData, setCharacterData] = useState([]);
   const [planetData, setPlanetData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,7 +37,7 @@ export const App = () => {
       });
 
       setCharacterData(peopleData);
-      setPlanetData(planetData)
+      setPlanetData(planetData);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -56,10 +56,15 @@ export const App = () => {
         Star Wars!
       </h1>
       <ErrorBoundary>
-        <SearchBox values={planetData} loading={loading}/>
+        <SearchBox
+          values={planetData}
+          loading={loading}
+          selected={selected}
+          setSelected={setSelected}
+        />
       </ErrorBoundary>
       <ErrorBoundary>
-        <CharacterGrid characterData={characterData} loading={loading}/>
+        <CharacterGrid characterData={characterData} loading={loading} planetFilter={selected}/>
       </ErrorBoundary>
     </>
   );
