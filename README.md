@@ -7,7 +7,7 @@
 ### Installation & Startup
 1. Clone down this repository and cd into the new directory:
 ```shell
-git clone https://github.com/jonathanhaviv/postmanTakehome.git
+git clone https://github.com/jonathanhaviv/swapiui.git
 
 cd postmanTakeHome
 ```
