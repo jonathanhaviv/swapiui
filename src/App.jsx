@@ -51,36 +51,41 @@ export const App = () => {
     getData().catch((error) => console.error(error));
   });
 
-  return (
-    <>
-      <h1 className="text-8xl text-center font-black text-white mb-5">
-        Star Wars!
-      </h1>
-      <ErrorBoundary>
-        <SearchBox
-          values={planetData}
-          loading={loading}
-          selected={planetSelected}
-          setSelected={setPlanetSelected}
-        />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <SearchBox
-          values={characterData}
-          loading={loading}
-          selected={peopleSelected}
-          setSelected={setPeopleSelected}
-          allowFuzzy={true}
-        />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <CharacterGrid
-          characterData={characterData}
-          loading={loading}
-          planetFilter={planetSelected}
-          peopleFilter={peopleSelected}
-        />
-      </ErrorBoundary>
-    </>
-  );
+ return (
+   <main className="py-5 flex-col">
+     <h1 className="text-8xl text-center font-black text-white mb-5">
+       Star Wars!
+     </h1>
+     <div className="flex">
+       <ErrorBoundary>
+         <SearchBox
+           values={planetData}
+           loading={loading}
+           selected={planetSelected}
+           setSelected={setPlanetSelected}
+           searchingFor="Planets"
+           allowFuzzy={false}
+         />
+       </ErrorBoundary>
+       <ErrorBoundary>
+         <SearchBox
+           values={characterData}
+           loading={loading}
+           selected={peopleSelected}
+           setSelected={setPeopleSelected}
+           searchingFor="Character Names"
+           allowFuzzy={true}
+         />
+       </ErrorBoundary>
+     </div>
+     <ErrorBoundary>
+       <CharacterGrid
+         characterData={characterData}
+         loading={loading}
+         planetFilter={planetSelected}
+         peopleFilter={peopleSelected}
+       />
+     </ErrorBoundary>
+   </main>
+ );
 };

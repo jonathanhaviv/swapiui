@@ -7,6 +7,7 @@ export const SearchBox = ({
   values,
   loading,
   setSelected,
+  searchingFor,
   selected = "",
   filter = simpleFilter,
   allowFuzzy = false,
@@ -22,6 +23,9 @@ export const SearchBox = ({
 
   return (
     <div className="mx-auto w-1/5">
+      <span className="text-slate-200 text-sm tracking-tight font-bold uppercase">
+        Search by {searchingFor}:
+      </span>
       <Combobox value={selected} onChange={setSelected}>
         <div className="relative  cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none sm:text-sm">
           <Combobox.Input
@@ -97,6 +101,12 @@ export const SearchBox = ({
           )}
         </Combobox.Options>
       </Combobox>
+      <button
+        onClick={() => setSelected("")}
+        className="bg-white hover:bg-slate-100 focus:bg-slate-100 p-2 rounded-full my-2 font-extrabold"
+      >
+        Clear Filter
+      </button>
     </div>
   );
 };
