@@ -1,32 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { Combobox } from "@headlessui/react";
-import { fetchPaginatedData } from "../utils/fetchPaginatedData";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { simpleFilter } from "../utils/filters";
 
-export const SearchBox = ({ filter = simpleFilter}) => {
-  const [values, setValues] = useState([]);
+export const SearchBox = ({ values, loading, filter = simpleFilter}) => {
   const [selected, setSelected] = useState("");
   const [query, setQuery] = useState("");
-
-  // todo - add filter logic to filter list as a user types
   const [filteredData, setFilteredData] = useState(values);
-  const [loading, setLoading] = useState(true)
-
-  // todo - move requests from here and CharacterGrid into App to avoid multiple requests for the same data
-  const getData = async () => {
-    const api = "https://swapi.dev/api";
-    const planetData = await fetchPaginatedData(api, "planets", 1);
-
-    setValues(planetData);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    if (loading === true) {
-      getData().catch((error) => console.error(error));
-    }
-  });
 
   useEffect(() => {
     if (loading === true) return;

@@ -5,50 +5,9 @@ import { ErrorBoundary } from "./ErrorBoundary";
 import { BoltIcon } from "@heroicons/react/24/outline";
 
 
-export const CharacterGrid = () => {
-  const [characterData, setCharacterData] = useState([]);
-
+export const CharacterGrid = ({ characterData, loading }) => {
   // todo - update logic for homeworld url to homeworld name to implement the filter
   const [planetFilter, setPlanetFilter] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  const getData = async () => {
-    if (loading === false) return;
-
-    const api = "https://swapi.dev/api";
-
-    try {
-      let peopleData = await fetchPaginatedData(api, "people", 1);
-
-      /* Planet Data. Deciding to pull all the planet data once instead of making individual fetch requests per card. 
-      - Allows for reusing the data as a full list easily
-      - Avoid fetching the same data twice (could implement a cache)
-      Tradeoff: Longer initial load time in favor of faster changes on interactions
-      */
-      const planetData = await fetchPaginatedData(api, "planets", 1);
-
-      peopleData = peopleData.map((character) => {
-        const homeworld = planetData.find(
-          (planet) => planet.url === character.homeworld
-        );
-
-        character.homeworld = homeworld.name;
-        return character;
-      });
-
-      setCharacterData(peopleData);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    if (loading === true) {
-      getData().catch((error) => console.error(error));
-    }
-  });
 
   if (loading === true) {
     return (
