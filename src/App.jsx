@@ -19,14 +19,14 @@ export const App = () => {
     const api = "https://swapi.dev/api";
 
     try {
-      let peopleData = await fetchPaginatedData(api, "people", 1);
+      let peopleData = await fetchPaginatedData(api, "people", 9);
 
       /* Planet Data. Deciding to pull all the planet data once instead of making individual fetch requests per card. 
       - Allows for reusing the data as a full list easily
       - Avoid fetching the same data twice (could implement a cache)
       Tradeoff: Longer initial load time in favor of faster changes on interactions
       */
-      const planetData = await fetchPaginatedData(api, "planets", 1);
+      const planetData = await fetchPaginatedData(api, "planets", 6);
 
       peopleData = peopleData.map((character) => {
         const homeworld = planetData.find(
